@@ -16,7 +16,6 @@ phases:
         - sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' simple_jwt_api.yml
         - $(aws ecr get-login --no-include-email)
         - export KUBECONFIG=$HOME/.kube/config
-         
   build:
     commands:
       - docker build --tag $REPOSITORY_URI:$TAG .
@@ -24,10 +23,6 @@ phases:
   post_build:
     commands:
       - docker push $REPOSITORY_URI:$TAG
-      - echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId'
-      - echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey'
-      - echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken'
-      - echo ${EKS_CLUSTER_NAME}  
       - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name codebuild-kubectl --duration-seconds 900)
       - export AWS_ACCESS_KEY_ID="$(echo ${CREDENTIALS} | jq -r '.Credentials.AccessKeyId')"
       - export AWS_SECRET_ACCESS_KEY="$(echo ${CREDENTIALS} | jq -r '.Credentials.SecretAccessKey')"
