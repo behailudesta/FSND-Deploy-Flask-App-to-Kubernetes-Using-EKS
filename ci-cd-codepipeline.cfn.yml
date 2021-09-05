@@ -40,8 +40,8 @@ Parameters:
 
   GitHubUser:
     Type: String
-    Default: samtheBrave
-    Description: GitHub username or organization
+    Default: behailu.asnake@gmail.com
+    Description: github user name
     MinLength: 3
     MaxLength: 100
     ConstraintDescription: You must enter a GitHub username or organization
