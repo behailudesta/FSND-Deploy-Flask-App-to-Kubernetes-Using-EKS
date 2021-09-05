@@ -40,7 +40,7 @@ Parameters:
 
   GitHubUser:
     Type: String
-    Default: behailu.asnake@gmail.com
+    Default: behailudesta
     Description: github user name
     MinLength: 3
     MaxLength: 100
