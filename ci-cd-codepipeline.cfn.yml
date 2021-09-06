@@ -40,8 +40,8 @@ Parameters:
 
   GitHubUser:
     Type: String
-    Default: behailudesta
-    Description: github user name
+    Default: jungleBadger
+    Description: GitHub username or organization
     MinLength: 3
     MaxLength: 100
     ConstraintDescription: You must enter a GitHub username or organization
@@ -155,7 +155,7 @@ Resources:
               response['Data'] = {"Message": "Resource creation failed"}
 
             response_body = json.dumps(response)
-            headers = {'content-type': '', "content-length": len(response_body) }
+            headers = {'content-type': '', "content-length": str(len(response_body)) }
             put_response = requests.put(event['ResponseURL'], headers=headers, data=response_body)
             return response
 
