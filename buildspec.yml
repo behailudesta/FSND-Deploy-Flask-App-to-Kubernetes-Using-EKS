@@ -35,6 +35,8 @@ phases:
       - printf '[{"name":"simple_jwt_api","imageUri":"%s"}]' $REPOSITORY_URI:$TAG > build.json
       - pwd
       - ls
+      - pip3 install -r requirements.txt
+      - python -m pytest test_main.py
 artifacts:
   files: build.json
 
